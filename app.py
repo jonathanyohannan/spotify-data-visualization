@@ -2,6 +2,10 @@ import os
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import time
+import dash
+from dash import dcc
+from dash import html
+import plotly.express as px
 import pandas as pd
 
 
@@ -12,10 +16,11 @@ c_credentials_manager = SpotifyClientCredentials(client_id=c_id, client_secret=c
 sp = spotipy.Spotify(client_credentials_manager=c_credentials_manager)
 
 # Get track IDs from playlist
+# Playlist is a public playlist I have created with all tracks from every studio album by Tame Impala
 # Spotify URL: https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF?si=ab299c75b0ed405c
 track_ids = []
 playlist = sp.playlist(
-    playlist_id="https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF?si=ab299c75b0ed405c"
+    playlist_id="https://open.spotify.com/playlist/0oxqEzWZEDFVBfcfBQf3CC?si=b8b691e2c4024b93"
 )
 for item in playlist["tracks"]["items"]:
     track = item["track"]
@@ -33,11 +38,12 @@ for item in playlist["tracks"]["items"]:
 # acousticness: A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.
 tracks = []
 for track_id in track_ids:
-    time.sleep(0.3)
+    time.sleep(0.1)
     metadata = sp.track(track_id)
     audio_features = sp.audio_features(track_id)
     name = metadata["name"]
     artist = metadata["album"]["artists"][0]["name"]
+    album = metadata["album"]["name"]
     # mood
     danceability = audio_features[0]["danceability"]
     valence = audio_features[0]["valence"]
@@ -54,6 +60,7 @@ for track_id in track_ids:
     track = [
         name,
         artist,
+        album,
         danceability,
         valence,
         energy,
@@ -72,6 +79,7 @@ df = pd.DataFrame(
     columns=[
         "name",
         "artist",
+        "album",
         "danceability",
         "valence",
         "energy",
