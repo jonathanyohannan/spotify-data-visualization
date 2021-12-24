@@ -84,6 +84,7 @@ colors = {
 }
 
 app = dash.Dash(__name__)
+server = app.server
 app.title = "Spotify Data Visualizer"
 
 app.layout = html.Div(
