@@ -12,6 +12,8 @@ import pandas as pd
 
 c_id = os.environ.get("SPOTIPY_CLIENT_ID")
 c_secret = os.environ.get("SPOTIPY_CLIENT_SECRET")
+# c_id = ""
+# c_secret = ""
 
 c_credentials_manager = SpotifyClientCredentials(client_id=c_id, client_secret=c_secret)
 sp = spotipy.Spotify(client_credentials_manager=c_credentials_manager)
