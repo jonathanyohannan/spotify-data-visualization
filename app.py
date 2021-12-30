@@ -100,7 +100,7 @@ app.layout = html.Div(
                                 "flex-direction": "column",
                                 "justify-content": "space-between",
                                 "align-items": "flex-start",
-                                "padding": "8%",
+                                "padding": "16px",
                             },
                             children=[
                                 html.P(id="name"),
@@ -109,6 +109,10 @@ app.layout = html.Div(
                             ],
                         ),
                     ],
+                ),
+                html.Audio(
+                    id="preview",
+                    controls=True,
                 ),
                 html.Div(
                     id="danceability-container",
@@ -356,6 +360,8 @@ app.layout = html.Div(
     Output(component_id="error-message", component_property="style"),
     Output(component_id="output-container", component_property="style"),
     Output(component_id="image", component_property="src"),
+    Output(component_id="preview", component_property="src"),
+    Output(component_id="preview", component_property="style"),
     Output(component_id="name", component_property="children"),
     Output(component_id="artist", component_property="children"),
     Output(component_id="album", component_property="children"),
@@ -395,32 +401,69 @@ def update_output(n_clicks, query):
             no_update,
             no_update,
             no_update,
+            no_update,
+            no_update,
         )
     df = get_track_data(uri)
-    return (
-        {
-            "display": "none",
-        },
-        {
-            "display": "flex",
-            "flex-direction": "column",
-            "justify-content": "space-evenly",
-            "align-items": "center",
-        },
-        df.loc[0]["image"],
-        df.loc[0]["name"],
-        "by {}".format(df.loc[0]["artist"]),
-        "on {}".format(df.loc[0]["album"]),
-        create_graph(dataframe=df, variable="danceability"),
-        create_graph(dataframe=df, variable="valence"),
-        create_graph(dataframe=df, variable="energy"),
-        create_graph(dataframe=df, variable="tempo"),
-        create_graph(dataframe=df, variable="loudness"),
-        create_graph(dataframe=df, variable="speechiness"),
-        create_graph(dataframe=df, variable="instrumentalness"),
-        create_graph(dataframe=df, variable="liveness"),
-        create_graph(dataframe=df, variable="acousticness"),
-    )
+    if df.loc[0]["preview_url"] is not None:
+        return (
+            {
+                "display": "none",
+            },
+            {
+                "display": "flex",
+                "flex-direction": "column",
+                "justify-content": "space-evenly",
+                "align-items": "center",
+            },
+            df.loc[0]["image"],
+            df.loc[0]["preview_url"],
+            {
+                "display": "block",
+                "margin-top": "16px",
+            },
+            df.loc[0]["name"],
+            "by {}".format(df.loc[0]["artist"]),
+            "on {}".format(df.loc[0]["album"]),
+            create_graph(dataframe=df, variable="danceability"),
+            create_graph(dataframe=df, variable="valence"),
+            create_graph(dataframe=df, variable="energy"),
+            create_graph(dataframe=df, variable="tempo"),
+            create_graph(dataframe=df, variable="loudness"),
+            create_graph(dataframe=df, variable="speechiness"),
+            create_graph(dataframe=df, variable="instrumentalness"),
+            create_graph(dataframe=df, variable="liveness"),
+            create_graph(dataframe=df, variable="acousticness"),
+        )
+    else:
+        return (
+            {
+                "display": "none",
+            },
+            {
+                "display": "flex",
+                "flex-direction": "column",
+                "justify-content": "space-evenly",
+                "align-items": "center",
+            },
+            df.loc[0]["image"],
+            "",
+            {
+                "display": "none",
+            },
+            df.loc[0]["name"],
+            "by {}".format(df.loc[0]["artist"]),
+            "on {}".format(df.loc[0]["album"]),
+            create_graph(dataframe=df, variable="danceability"),
+            create_graph(dataframe=df, variable="valence"),
+            create_graph(dataframe=df, variable="energy"),
+            create_graph(dataframe=df, variable="tempo"),
+            create_graph(dataframe=df, variable="loudness"),
+            create_graph(dataframe=df, variable="speechiness"),
+            create_graph(dataframe=df, variable="instrumentalness"),
+            create_graph(dataframe=df, variable="liveness"),
+            create_graph(dataframe=df, variable="acousticness"),
+        )
 
 
 if __name__ == "__main__":
