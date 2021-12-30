@@ -1,4 +1,11 @@
 body {
   margin: 0;
-  background-color: #121212;
+  padding-left: 8%;
+  padding-right: 8%;
+  background-color: #191414;
+  color: #ffffff;
+}
+
+.modebar {
+  display: none;
 }
