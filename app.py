@@ -50,7 +50,7 @@ app.layout = html.Div(
             children="Source Code",
             href="https://github.com/jonathanyohannan/spotify-data-visualization/",
             style={
-                "color": colors["pink"],
+                "color": colors["green"],
             },
         ),
         html.Br(),
@@ -106,247 +106,241 @@ app.layout = html.Div(
                                 html.P(id="name"),
                                 html.P(id="artist"),
                                 html.P(id="album"),
+                                html.Audio(
+                                    id="preview",
+                                    controls=True,
+                                ),
                             ],
                         ),
                     ],
                 ),
-                html.Audio(
-                    id="preview",
-                    controls=True,
-                ),
+                html.Br(),
                 html.Div(
-                    id="danceability-container",
+                    id="cards",
                     style={
-                        "display": "flex",
-                        "flex-direction": "row",
-                        "justify-content": "space-evenly",
-                        "align-items": "center",
+                        "display": "grid",
+                        "grid-template-columns": "repeat(3, minmax(300px, 1fr))",
+                        "grid-auto-rows": "1fr",
+                        "grid-gap": "1em",
                     },
                     children=[
-                        dcc.Graph(
-                            id="danceability-graph",
+                        html.Div(
+                            id="danceability-card",
                             style={
-                                "flex": "1 1 0",
+                                "display": "flex",
+                                "flex-direction": "column",
+                                "background-color": "#000000",
+                                "border-radius": "8px",
+                                "padding": "0.5em",
                             },
+                            children=[
+                                html.Div(
+                                    id="danceability-card-value",
+                                    style={
+                                        "font-size": "2em",
+                                        "color": colors["pink"],
+                                        "margin-bottom": "auto",
+                                    },
+                                ),
+                                html.Div(
+                                    id="danceability-card-description",
+                                    children=audio_feature_description("danceability"),
+                                ),
+                            ],
                         ),
-                        html.P(
-                            id="danceability-description",
-                            children=audio_feature_description(feature="danceability"),
+                        html.Div(
+                            id="valence-card",
                             style={
-                                "flex": "1 1 0",
-                                "color": colors["white"],
-                                "text-align": "center",
+                                "display": "flex",
+                                "flex-direction": "column",
+                                "background-color": "#000000",
+                                "border-radius": "8px",
+                                "padding": "0.5em",
                             },
+                            children=[
+                                html.Div(
+                                    id="valence-card-value",
+                                    style={
+                                        "font-size": "2em",
+                                        "color": colors["pink"],
+                                        "margin-bottom": "auto",
+                                    },
+                                ),
+                                html.Div(
+                                    id="valence-card-description",
+                                    children=audio_feature_description("valence"),
+                                ),
+                            ],
                         ),
-                    ],
-                ),
-                html.Div(
-                    id="valence-container",
-                    style={
-                        "display": "flex",
-                        "flex-direction": "row",
-                        "justify-content": "space-evenly",
-                        "align-items": "center",
-                    },
-                    children=[
-                        dcc.Graph(
-                            id="valence-graph",
+                        html.Div(
+                            id="energy-card",
                             style={
-                                "flex": "1 1 0",
+                                "display": "flex",
+                                "flex-direction": "column",
+                                "background-color": "#000000",
+                                "border-radius": "8px",
+                                "padding": "0.5em",
                             },
+                            children=[
+                                html.Div(
+                                    id="energy-card-value",
+                                    style={
+                                        "font-size": "2em",
+                                        "color": colors["pink"],
+                                        "margin-bottom": "auto",
+                                    },
+                                ),
+                                html.Div(
+                                    id="energy-card-description",
+                                    children=audio_feature_description("energy"),
+                                ),
+                            ],
                         ),
-                        html.P(
-                            id="valence-description",
-                            children=audio_feature_description(feature="valence"),
+                        html.Div(
+                            id="tempo-card",
                             style={
-                                "flex": "1 1 0",
-                                "color": colors["white"],
-                                "text-align": "center",
+                                "display": "flex",
+                                "flex-direction": "column",
+                                "background-color": "#000000",
+                                "border-radius": "8px",
+                                "padding": "0.5em",
                             },
+                            children=[
+                                html.Div(
+                                    id="tempo-card-value",
+                                    style={
+                                        "font-size": "2em",
+                                        "color": colors["pink"],
+                                        "margin-bottom": "auto",
+                                    },
+                                ),
+                                html.Div(
+                                    id="tempo-card-description",
+                                    children=audio_feature_description("tempo"),
+                                ),
+                            ],
                         ),
-                    ],
-                ),
-                html.Div(
-                    id="energy-container",
-                    style={
-                        "display": "flex",
-                        "flex-direction": "row",
-                        "justify-content": "space-evenly",
-                        "align-items": "center",
-                    },
-                    children=[
-                        dcc.Graph(
-                            id="energy-graph",
+                        html.Div(
+                            id="loudness-card",
                             style={
-                                "flex": "1 1 0",
+                                "display": "flex",
+                                "flex-direction": "column",
+                                "background-color": "#000000",
+                                "border-radius": "8px",
+                                "padding": "0.5em",
                             },
+                            children=[
+                                html.Div(
+                                    id="loudness-card-value",
+                                    style={
+                                        "font-size": "2em",
+                                        "color": colors["pink"],
+                                        "margin-bottom": "auto",
+                                    },
+                                ),
+                                html.Div(
+                                    id="loudness-card-description",
+                                    children=audio_feature_description("loudness"),
+                                ),
+                            ],
                         ),
-                        html.P(
-                            id="energy-description",
-                            children=audio_feature_description(feature="energy"),
+                        html.Div(
+                            id="speechiness-card",
                             style={
-                                "flex": "1 1 0",
-                                "color": colors["white"],
-                                "text-align": "center",
+                                "display": "flex",
+                                "flex-direction": "column",
+                                "background-color": "#000000",
+                                "border-radius": "8px",
+                                "padding": "0.5em",
                             },
+                            children=[
+                                html.Div(
+                                    id="speechiness-card-value",
+                                    style={
+                                        "font-size": "2em",
+                                        "color": colors["pink"],
+                                        "margin-bottom": "auto",
+                                    },
+                                ),
+                                html.Div(
+                                    id="speechiness-card-description",
+                                    children=audio_feature_description("speechiness"),
+                                ),
+                            ],
                         ),
-                    ],
-                ),
-                html.Div(
-                    id="tempo-container",
-                    style={
-                        "display": "flex",
-                        "flex-direction": "row",
-                        "justify-content": "space-evenly",
-                        "align-items": "center",
-                    },
-                    children=[
-                        dcc.Graph(
-                            id="tempo-graph",
+                        html.Div(
+                            id="instrumentalness-card",
                             style={
-                                "flex": "1 1 0",
+                                "display": "flex",
+                                "flex-direction": "column",
+                                "background-color": "#000000",
+                                "border-radius": "8px",
+                                "padding": "0.5em",
                             },
+                            children=[
+                                html.Div(
+                                    id="instrumentalness-card-value",
+                                    style={
+                                        "font-size": "2em",
+                                        "color": colors["pink"],
+                                        "margin-bottom": "auto",
+                                    },
+                                ),
+                                html.Div(
+                                    id="instrumentalness-card-description",
+                                    children=audio_feature_description(
+                                        "instrumentalness"
+                                    ),
+                                ),
+                            ],
                         ),
-                        html.P(
-                            id="tempo-description",
-                            children=audio_feature_description(feature="tempo"),
+                        html.Div(
+                            id="liveness-card",
                             style={
-                                "flex": "1 1 0",
-                                "color": colors["white"],
-                                "text-align": "center",
+                                "display": "flex",
+                                "flex-direction": "column",
+                                "background-color": "#000000",
+                                "border-radius": "8px",
+                                "padding": "0.5em",
                             },
+                            children=[
+                                html.Div(
+                                    id="liveness-card-value",
+                                    style={
+                                        "font-size": "2em",
+                                        "color": colors["pink"],
+                                        "margin-bottom": "auto",
+                                    },
+                                ),
+                                html.Div(
+                                    id="liveness-card-description",
+                                    children=audio_feature_description("liveness"),
+                                ),
+                            ],
                         ),
-                    ],
-                ),
-                html.Div(
-                    id="loudness-container",
-                    style={
-                        "display": "flex",
-                        "flex-direction": "row",
-                        "justify-content": "space-evenly",
-                        "align-items": "center",
-                    },
-                    children=[
-                        dcc.Graph(
-                            id="loudness-graph",
+                        html.Div(
+                            id="acousticness-card",
                             style={
-                                "flex": "1 1 0",
+                                "display": "flex",
+                                "flex-direction": "column",
+                                "background-color": "#000000",
+                                "border-radius": "8px",
+                                "padding": "0.5em",
                             },
-                        ),
-                        html.P(
-                            id="loudness-description",
-                            children=audio_feature_description(feature="loudness"),
-                            style={
-                                "flex": "1 1 0",
-                                "color": colors["white"],
-                                "text-align": "center",
-                            },
-                        ),
-                    ],
-                ),
-                html.Div(
-                    id="speechiness-container",
-                    style={
-                        "display": "flex",
-                        "flex-direction": "row",
-                        "justify-content": "space-evenly",
-                        "align-items": "center",
-                    },
-                    children=[
-                        dcc.Graph(
-                            id="speechiness-graph",
-                            style={
-                                "flex": "1 1 0",
-                            },
-                        ),
-                        html.P(
-                            id="speechiness-description",
-                            children=audio_feature_description(feature="speechiness"),
-                            style={
-                                "flex": "1 1 0",
-                                "color": colors["white"],
-                                "text-align": "center",
-                            },
-                        ),
-                    ],
-                ),
-                html.Div(
-                    id="instrumentalness-container",
-                    style={
-                        "display": "flex",
-                        "flex-direction": "row",
-                        "justify-content": "space-evenly",
-                        "align-items": "center",
-                    },
-                    children=[
-                        dcc.Graph(
-                            id="instrumentalness-graph",
-                            style={
-                                "flex": "1 1 0",
-                            },
-                        ),
-                        html.P(
-                            id="instrumentalness-description",
-                            children=audio_feature_description(
-                                feature="instrumentalness"
-                            ),
-                            style={
-                                "flex": "1 1 0",
-                                "color": colors["white"],
-                                "text-align": "center",
-                            },
-                        ),
-                    ],
-                ),
-                html.Div(
-                    id="liveness-container",
-                    style={
-                        "display": "flex",
-                        "flex-direction": "row",
-                        "justify-content": "space-evenly",
-                        "align-items": "center",
-                    },
-                    children=[
-                        dcc.Graph(
-                            id="liveness-graph",
-                            style={
-                                "flex": "1 1 0",
-                            },
-                        ),
-                        html.P(
-                            id="liveness-description",
-                            children=audio_feature_description(feature="liveness"),
-                            style={
-                                "flex": "1 1 0",
-                                "color": colors["white"],
-                                "text-align": "center",
-                            },
-                        ),
-                    ],
-                ),
-                html.Div(
-                    id="acousticness-container",
-                    style={
-                        "display": "flex",
-                        "flex-direction": "row",
-                        "justify-content": "space-evenly",
-                        "align-items": "center",
-                    },
-                    children=[
-                        dcc.Graph(
-                            id="acousticness-graph",
-                            style={
-                                "flex": "1 1 0",
-                            },
-                        ),
-                        html.P(
-                            id="acousticness-description",
-                            children=audio_feature_description(feature="acousticness"),
-                            style={
-                                "flex": "1 1 0",
-                                "color": colors["white"],
-                                "text-align": "center",
-                            },
+                            children=[
+                                html.Div(
+                                    id="acousticness-card-value",
+                                    style={
+                                        "font-size": "2em",
+                                        "color": colors["pink"],
+                                        "margin-bottom": "auto",
+                                    },
+                                ),
+                                html.Div(
+                                    id="acousticness-card-description",
+                                    children=audio_feature_description("acousticness"),
+                                ),
+                            ],
                         ),
                     ],
                 ),
@@ -365,15 +359,15 @@ app.layout = html.Div(
     Output(component_id="name", component_property="children"),
     Output(component_id="artist", component_property="children"),
     Output(component_id="album", component_property="children"),
-    Output(component_id="danceability-graph", component_property="figure"),
-    Output(component_id="valence-graph", component_property="figure"),
-    Output(component_id="energy-graph", component_property="figure"),
-    Output(component_id="tempo-graph", component_property="figure"),
-    Output(component_id="loudness-graph", component_property="figure"),
-    Output(component_id="speechiness-graph", component_property="figure"),
-    Output(component_id="instrumentalness-graph", component_property="figure"),
-    Output(component_id="liveness-graph", component_property="figure"),
-    Output(component_id="acousticness-graph", component_property="figure"),
+    Output(component_id="danceability-card-value", component_property="children"),
+    Output(component_id="valence-card-value", component_property="children"),
+    Output(component_id="energy-card-value", component_property="children"),
+    Output(component_id="tempo-card-value", component_property="children"),
+    Output(component_id="loudness-card-value", component_property="children"),
+    Output(component_id="speechiness-card-value", component_property="children"),
+    Output(component_id="instrumentalness-card-value", component_property="children"),
+    Output(component_id="liveness-card-value", component_property="children"),
+    Output(component_id="acousticness-card-value", component_property="children"),
     Input(component_id="submit-button", component_property="n_clicks"),
     State(component_id="query-input", component_property="value"),
 )
@@ -406,64 +400,42 @@ def update_output(n_clicks, query):
         )
     df = get_track_data(uri)
     if df.loc[0]["preview_url"] is not None:
-        return (
-            {
-                "display": "none",
-            },
-            {
-                "display": "flex",
-                "flex-direction": "column",
-                "justify-content": "space-evenly",
-                "align-items": "center",
-            },
-            df.loc[0]["image"],
-            df.loc[0]["preview_url"],
-            {
-                "display": "block",
-                "margin-top": "16px",
-            },
-            df.loc[0]["name"],
-            "by {}".format(df.loc[0]["artist"]),
-            "on {}".format(df.loc[0]["album"]),
-            create_graph(dataframe=df, variable="danceability"),
-            create_graph(dataframe=df, variable="valence"),
-            create_graph(dataframe=df, variable="energy"),
-            create_graph(dataframe=df, variable="tempo"),
-            create_graph(dataframe=df, variable="loudness"),
-            create_graph(dataframe=df, variable="speechiness"),
-            create_graph(dataframe=df, variable="instrumentalness"),
-            create_graph(dataframe=df, variable="liveness"),
-            create_graph(dataframe=df, variable="acousticness"),
-        )
+        preview_src = df.loc[0]["preview_url"]
+        preview_style = {
+            "display": "block",
+            "margin-top": "16px",
+        }
     else:
-        return (
-            {
-                "display": "none",
-            },
-            {
-                "display": "flex",
-                "flex-direction": "column",
-                "justify-content": "space-evenly",
-                "align-items": "center",
-            },
-            df.loc[0]["image"],
-            "",
-            {
-                "display": "none",
-            },
-            df.loc[0]["name"],
-            "by {}".format(df.loc[0]["artist"]),
-            "on {}".format(df.loc[0]["album"]),
-            create_graph(dataframe=df, variable="danceability"),
-            create_graph(dataframe=df, variable="valence"),
-            create_graph(dataframe=df, variable="energy"),
-            create_graph(dataframe=df, variable="tempo"),
-            create_graph(dataframe=df, variable="loudness"),
-            create_graph(dataframe=df, variable="speechiness"),
-            create_graph(dataframe=df, variable="instrumentalness"),
-            create_graph(dataframe=df, variable="liveness"),
-            create_graph(dataframe=df, variable="acousticness"),
-        )
+        preview_src = ""
+        preview_style = {
+            "display": "none",
+        }
+    return (
+        {
+            "display": "none",
+        },
+        {
+            "display": "flex",
+            "flex-direction": "column",
+            "justify-content": "space-evenly",
+            "align-items": "center",
+        },
+        df.loc[0]["image"],
+        preview_src,
+        preview_style,
+        df.loc[0]["name"],
+        "by {}".format(df.loc[0]["artist"]),
+        "on {}".format(df.loc[0]["album"]),
+        "Danceability: {}".format(df.loc[0]["danceability"]),
+        "Valence: {}".format(df.loc[0]["valence"]),
+        "Energy: {}".format(df.loc[0]["energy"]),
+        "Tempo: {}".format(df.loc[0]["tempo"]),
+        "Loudness: {}".format(df.loc[0]["loudness"]),
+        "Speechiness: {}".format(df.loc[0]["speechiness"]),
+        "Instrumentalness: {}".format(df.loc[0]["instrumentalness"]),
+        "Liveness: {}".format(df.loc[0]["liveness"]),
+        "Acousticness: {}".format(df.loc[0]["acousticness"]),
+    )
 
 
 if __name__ == "__main__":

@@ -1,7 +1,8 @@
 body {
   margin: 0;
-  padding-left: 8%;
-  padding-right: 8%;
+  padding-left: 16.5%;
+  padding-right: 16.5%;
+  padding-bottom: 1em;
   background-color: #191414;
   color: #ffffff;
 }
