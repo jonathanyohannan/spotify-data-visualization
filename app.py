@@ -53,6 +53,9 @@ app.layout = html.Div(
         ),
         html.Div(
             children="Search for any track to learn about its audio features. Data is pulled from the Spotify API.",
+            style={
+                "text-align": "center",
+            },
         ),
         html.A(
             children="Source Code",
