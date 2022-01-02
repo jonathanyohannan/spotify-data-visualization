@@ -42,13 +42,14 @@ app.layout = html.Div(
         "justify-content": "space-between",
         "align-items": "center",
         "gap": "1rem",
-        "backgroundColor": colors["black"],
+        "backgroundColor": colors["white"],
     },
     children=[
         html.H1(
             children="Spotify Data Visualizer",
             style={
                 "color": colors["green"],
+                "text-align": "center",
             },
         ),
         html.Div(
@@ -101,7 +102,12 @@ app.layout = html.Div(
                         "align-items": "center",
                     },
                     children=[
-                        html.Img(id="image"),
+                        html.Img(
+                            id="image",
+                            style={
+                                "box-shadow": "10px 10px 5px grey",
+                            },
+                        ),
                         html.Br(),
                         html.Div(id="name"),
                         html.Div(id="artist"),
@@ -126,9 +132,10 @@ app.layout = html.Div(
                             style={
                                 "display": "flex",
                                 "flex-direction": "column",
-                                "background-color": "#000000",
+                                "background-color": colors["black"],
                                 "border-radius": "8px",
                                 "padding": "1rem",
+                                "box-shadow": "10px 10px 5px grey",
                             },
                             children=[
                                 html.Div(
@@ -154,6 +161,7 @@ app.layout = html.Div(
                                         "text-align": "center",
                                         "margin-top": "auto",
                                         "margin-bottom": "auto",
+                                        "color": colors["white"],
                                     },
                                 ),
                             ],
@@ -163,9 +171,10 @@ app.layout = html.Div(
                             style={
                                 "display": "flex",
                                 "flex-direction": "column",
-                                "background-color": "#000000",
+                                "background-color": colors["black"],
                                 "border-radius": "8px",
                                 "padding": "1rem",
+                                "box-shadow": "10px 10px 5px grey",
                             },
                             children=[
                                 html.Div(
@@ -191,6 +200,7 @@ app.layout = html.Div(
                                         "text-align": "center",
                                         "margin-top": "auto",
                                         "margin-bottom": "auto",
+                                        "color": colors["white"],
                                     },
                                 ),
                             ],
@@ -200,9 +210,10 @@ app.layout = html.Div(
                             style={
                                 "display": "flex",
                                 "flex-direction": "column",
-                                "background-color": "#000000",
+                                "background-color": colors["black"],
                                 "border-radius": "8px",
                                 "padding": "1rem",
+                                "box-shadow": "10px 10px 5px grey",
                             },
                             children=[
                                 html.Div(
@@ -228,6 +239,7 @@ app.layout = html.Div(
                                         "text-align": "center",
                                         "margin-top": "auto",
                                         "margin-bottom": "auto",
+                                        "color": colors["white"],
                                     },
                                 ),
                             ],
@@ -237,9 +249,10 @@ app.layout = html.Div(
                             style={
                                 "display": "flex",
                                 "flex-direction": "column",
-                                "background-color": "#000000",
+                                "background-color": colors["black"],
                                 "border-radius": "8px",
                                 "padding": "1rem",
+                                "box-shadow": "10px 10px 5px grey",
                             },
                             children=[
                                 html.Div(
@@ -265,6 +278,7 @@ app.layout = html.Div(
                                         "text-align": "center",
                                         "margin-top": "auto",
                                         "margin-bottom": "auto",
+                                        "color": colors["white"],
                                     },
                                 ),
                             ],
@@ -274,9 +288,10 @@ app.layout = html.Div(
                             style={
                                 "display": "flex",
                                 "flex-direction": "column",
-                                "background-color": "#000000",
+                                "background-color": colors["black"],
                                 "border-radius": "8px",
                                 "padding": "1rem",
+                                "box-shadow": "10px 10px 5px grey",
                             },
                             children=[
                                 html.Div(
@@ -302,6 +317,7 @@ app.layout = html.Div(
                                         "text-align": "center",
                                         "margin-top": "auto",
                                         "margin-bottom": "auto",
+                                        "color": colors["white"],
                                     },
                                 ),
                             ],
@@ -311,9 +327,10 @@ app.layout = html.Div(
                             style={
                                 "display": "flex",
                                 "flex-direction": "column",
-                                "background-color": "#000000",
+                                "background-color": colors["black"],
                                 "border-radius": "8px",
                                 "padding": "1rem",
+                                "box-shadow": "10px 10px 5px grey",
                             },
                             children=[
                                 html.Div(
@@ -339,6 +356,7 @@ app.layout = html.Div(
                                         "text-align": "center",
                                         "margin-top": "auto",
                                         "margin-bottom": "auto",
+                                        "color": colors["white"],
                                     },
                                 ),
                             ],
@@ -348,9 +366,10 @@ app.layout = html.Div(
                             style={
                                 "display": "flex",
                                 "flex-direction": "column",
-                                "background-color": "#000000",
+                                "background-color": colors["black"],
                                 "border-radius": "8px",
                                 "padding": "1rem",
+                                "box-shadow": "10px 10px 5px grey",
                             },
                             children=[
                                 html.Div(
@@ -378,6 +397,7 @@ app.layout = html.Div(
                                         "text-align": "center",
                                         "margin-top": "auto",
                                         "margin-bottom": "auto",
+                                        "color": colors["white"],
                                     },
                                 ),
                             ],
@@ -387,9 +407,10 @@ app.layout = html.Div(
                             style={
                                 "display": "flex",
                                 "flex-direction": "column",
-                                "background-color": "#000000",
+                                "background-color": colors["black"],
                                 "border-radius": "8px",
                                 "padding": "1rem",
+                                "box-shadow": "10px 10px 5px grey",
                             },
                             children=[
                                 html.Div(
@@ -415,6 +436,7 @@ app.layout = html.Div(
                                         "text-align": "center",
                                         "margin-top": "auto",
                                         "margin-bottom": "auto",
+                                        "color": colors["white"],
                                     },
                                 ),
                             ],
@@ -424,9 +446,10 @@ app.layout = html.Div(
                             style={
                                 "display": "flex",
                                 "flex-direction": "column",
-                                "background-color": "#000000",
+                                "background-color": colors["black"],
                                 "border-radius": "8px",
                                 "padding": "1rem",
+                                "box-shadow": "10px 10px 5px grey",
                             },
                             children=[
                                 html.Div(
@@ -452,6 +475,7 @@ app.layout = html.Div(
                                         "text-align": "center",
                                         "margin-top": "auto",
                                         "margin-bottom": "auto",
+                                        "color": colors["white"],
                                     },
                                 ),
                             ],
