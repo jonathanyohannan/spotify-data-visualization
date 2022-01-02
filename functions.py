@@ -12,14 +12,15 @@ colors = {
 }
 
 
+# Client ID and secret needed to access the Spotify API (client credentials flow).
 c_id = os.environ.get("SPOTIPY_CLIENT_ID")
 c_secret = os.environ.get("SPOTIPY_CLIENT_SECRET")
-# c_id = ""
-# c_secret = ""
 c_credentials_manager = SpotifyClientCredentials(client_id=c_id, client_secret=c_secret)
 sp = spotipy.Spotify(client_credentials_manager=c_credentials_manager)
 
 
+# Search for a track and return its Spotify URI.
+# Returns None if the query is empty or if there are no results found for the query.
 def get_track_uri(query):
     if query == "":
         return None
@@ -30,6 +31,8 @@ def get_track_uri(query):
         return None
 
 
+# Get the metadata and audio features of a track provided its Spotify URI.
+# Returns a pandas dataframe.
 def get_track_data(track_uri):
     metadata = sp.track(track_id=track_uri)
     audio_features = sp.audio_features(tracks=track_uri)
@@ -71,6 +74,7 @@ def get_track_data(track_uri):
     )
 
 
+# Returns descriptions of the different audio features provided in the Spotify API.
 def audio_feature_description(feature):
     if feature == "danceability":
         return "Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable."

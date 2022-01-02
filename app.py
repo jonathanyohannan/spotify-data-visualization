@@ -55,6 +55,7 @@ app.layout = html.Div(
             href="https://github.com/jonathanyohannan/spotify-data-visualization/",
             style={
                 "color": colors["green"],
+                "text-align": "center",
             },
         ),
         dcc.Input(
@@ -228,7 +229,7 @@ app.layout = html.Div(
                                     className="card-value",
                                 ),
                                 html.Div(
-                                    className="description",
+                                    className="card-description",
                                     children=audio_feature_description(
                                         "instrumentalness"
                                     ),
@@ -279,6 +280,7 @@ app.layout = html.Div(
 )
 
 
+# called when submit-button is clicked, query taken from query-input
 @app.callback(
     Output(component_id="error-message", component_property="style"),
     Output(component_id="output-container", component_property="style"),
@@ -301,14 +303,15 @@ app.layout = html.Div(
     State(component_id="query-input", component_property="value"),
 )
 def update_output(n_clicks, query):
-    if n_clicks == 0:
+    if n_clicks == 0:  # at start of app, don't update anything
         raise exceptions.PreventUpdate
-    uri = get_track_uri(query)
-    if uri is None:
+    uri = get_track_uri(query)  # search Spotify using query
+    if uri is None:  # display error message if no results found for query
         return (
             {  # error-message style
                 "display": "block",
                 "color": "red",
+                "text-align": "center",
             },
             no_update,  # output-container style
             no_update,  # image src
@@ -327,8 +330,8 @@ def update_output(n_clicks, query):
             no_update,  # liveness-card-value children
             no_update,  # acousticness-card-value children
         )
-    df = get_track_data(uri)
-    if df.loc[0]["preview_url"] is not None:
+    df = get_track_data(uri)  # get metadata and audio features for track
+    if df.loc[0]["preview_url"] is not None:  # check if track has a preview
         preview_src = df.loc[0]["preview_url"]
         preview_style = {
             "display": "block",
@@ -339,7 +342,7 @@ def update_output(n_clicks, query):
         preview_style = {
             "display": "none",
         }
-    return (
+    return (  # update output
         {  # error-message style
             "display": "none",
         },
