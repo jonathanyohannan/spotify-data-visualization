@@ -36,14 +36,6 @@ app.title = "Spotify Data Visualizer"
 
 app.layout = html.Div(
     id="container",
-    style={
-        "display": "flex",
-        "flex-direction": "column",
-        "justify-content": "space-between",
-        "align-items": "center",
-        "gap": "1rem",
-        "backgroundColor": colors["white"],
-    },
     children=[
         html.H1(
             children="Spotify Data Visualizer",
@@ -95,20 +87,14 @@ app.layout = html.Div(
             children=[
                 html.Div(
                     id="metadata-container",
-                    style={
-                        "display": "flex",
-                        "flex-direction": "column",
-                        "justify-content": "center",
-                        "align-items": "center",
-                    },
                     children=[
                         html.Img(
                             id="image",
                             style={
                                 "box-shadow": "10px 10px 5px grey",
+                                "margin-bottom": "1rem",
                             },
                         ),
-                        html.Br(),
                         html.Div(id="name"),
                         html.Div(id="artist"),
                         html.Div(id="album"),
@@ -120,363 +106,168 @@ app.layout = html.Div(
                 ),
                 html.Div(
                     id="cards-container",
-                    style={
-                        "display": "grid",
-                        "grid-template-columns": "repeat(auto-fill, minmax(16rem, 1fr))",
-                        "grid-auto-rows": "1fr",
-                        "grid-gap": "1rem",
-                    },
                     children=[
                         html.Div(
                             id="danceability-card",
-                            style={
-                                "display": "flex",
-                                "flex-direction": "column",
-                                "background-color": colors["black"],
-                                "border-radius": "8px",
-                                "padding": "1rem",
-                                "box-shadow": "10px 10px 5px grey",
-                            },
+                            className="card",
                             children=[
                                 html.Div(
-                                    style={
-                                        "font-size": "1.15rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-label",
                                     children="DANCEABILITY",
                                 ),
                                 html.Div(
                                     id="danceability-card-value",
-                                    style={
-                                        "font-size": "2.3rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-value",
                                 ),
                                 html.Div(
-                                    id="danceability-card-description",
+                                    className="card-description",
                                     children=audio_feature_description("danceability"),
-                                    style={
-                                        "text-align": "center",
-                                        "margin-top": "auto",
-                                        "margin-bottom": "auto",
-                                        "color": colors["white"],
-                                    },
                                 ),
                             ],
                         ),
                         html.Div(
                             id="valence-card",
-                            style={
-                                "display": "flex",
-                                "flex-direction": "column",
-                                "background-color": colors["black"],
-                                "border-radius": "8px",
-                                "padding": "1rem",
-                                "box-shadow": "10px 10px 5px grey",
-                            },
+                            className="card",
                             children=[
                                 html.Div(
-                                    style={
-                                        "font-size": "1.15rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-label",
                                     children="VALENCE",
                                 ),
                                 html.Div(
                                     id="valence-card-value",
-                                    style={
-                                        "font-size": "2.3rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-value",
                                 ),
                                 html.Div(
-                                    id="valence-card-description",
+                                    className="card-description",
                                     children=audio_feature_description("valence"),
-                                    style={
-                                        "text-align": "center",
-                                        "margin-top": "auto",
-                                        "margin-bottom": "auto",
-                                        "color": colors["white"],
-                                    },
                                 ),
                             ],
                         ),
                         html.Div(
                             id="energy-card",
-                            style={
-                                "display": "flex",
-                                "flex-direction": "column",
-                                "background-color": colors["black"],
-                                "border-radius": "8px",
-                                "padding": "1rem",
-                                "box-shadow": "10px 10px 5px grey",
-                            },
+                            className="card",
                             children=[
                                 html.Div(
-                                    style={
-                                        "font-size": "1.15rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-label",
                                     children="ENERGY",
                                 ),
                                 html.Div(
                                     id="energy-card-value",
-                                    style={
-                                        "font-size": "2.3rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-value",
                                 ),
                                 html.Div(
-                                    id="energy-card-description",
+                                    className="card-description",
                                     children=audio_feature_description("energy"),
-                                    style={
-                                        "text-align": "center",
-                                        "margin-top": "auto",
-                                        "margin-bottom": "auto",
-                                        "color": colors["white"],
-                                    },
                                 ),
                             ],
                         ),
                         html.Div(
                             id="tempo-card",
-                            style={
-                                "display": "flex",
-                                "flex-direction": "column",
-                                "background-color": colors["black"],
-                                "border-radius": "8px",
-                                "padding": "1rem",
-                                "box-shadow": "10px 10px 5px grey",
-                            },
+                            className="card",
                             children=[
                                 html.Div(
-                                    style={
-                                        "font-size": "1.15rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-label",
                                     children="TEMPO",
                                 ),
                                 html.Div(
                                     id="tempo-card-value",
-                                    style={
-                                        "font-size": "2.3rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-value",
                                 ),
                                 html.Div(
-                                    id="tempo-card-description",
+                                    className="card-description",
                                     children=audio_feature_description("tempo"),
-                                    style={
-                                        "text-align": "center",
-                                        "margin-top": "auto",
-                                        "margin-bottom": "auto",
-                                        "color": colors["white"],
-                                    },
                                 ),
                             ],
                         ),
                         html.Div(
                             id="loudness-card",
-                            style={
-                                "display": "flex",
-                                "flex-direction": "column",
-                                "background-color": colors["black"],
-                                "border-radius": "8px",
-                                "padding": "1rem",
-                                "box-shadow": "10px 10px 5px grey",
-                            },
+                            className="card",
                             children=[
                                 html.Div(
-                                    style={
-                                        "font-size": "1.15rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-label",
                                     children="LOUDNESS",
                                 ),
                                 html.Div(
                                     id="loudness-card-value",
-                                    style={
-                                        "font-size": "2.3rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-value",
                                 ),
                                 html.Div(
-                                    id="loudness-card-description",
+                                    className="card-description",
                                     children=audio_feature_description("loudness"),
-                                    style={
-                                        "text-align": "center",
-                                        "margin-top": "auto",
-                                        "margin-bottom": "auto",
-                                        "color": colors["white"],
-                                    },
                                 ),
                             ],
                         ),
                         html.Div(
                             id="speechiness-card",
-                            style={
-                                "display": "flex",
-                                "flex-direction": "column",
-                                "background-color": colors["black"],
-                                "border-radius": "8px",
-                                "padding": "1rem",
-                                "box-shadow": "10px 10px 5px grey",
-                            },
+                            className="card",
                             children=[
                                 html.Div(
-                                    style={
-                                        "font-size": "1.15rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-label",
                                     children="SPEECHINESS",
                                 ),
                                 html.Div(
                                     id="speechiness-card-value",
-                                    style={
-                                        "font-size": "2.3rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-value",
                                 ),
                                 html.Div(
-                                    id="speechiness-card-description",
+                                    className="card-description",
                                     children=audio_feature_description("speechiness"),
-                                    style={
-                                        "text-align": "center",
-                                        "margin-top": "auto",
-                                        "margin-bottom": "auto",
-                                        "color": colors["white"],
-                                    },
                                 ),
                             ],
                         ),
                         html.Div(
                             id="instrumentalness-card",
-                            style={
-                                "display": "flex",
-                                "flex-direction": "column",
-                                "background-color": colors["black"],
-                                "border-radius": "8px",
-                                "padding": "1rem",
-                                "box-shadow": "10px 10px 5px grey",
-                            },
+                            className="card",
                             children=[
                                 html.Div(
-                                    style={
-                                        "font-size": "1.15rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-label",
                                     children="INSTRUMENTALNESS",
                                 ),
                                 html.Div(
                                     id="instrumentalness-card-value",
-                                    style={
-                                        "font-size": "2.3rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-value",
                                 ),
                                 html.Div(
-                                    id="instrumentalness-card-description",
+                                    className="description",
                                     children=audio_feature_description(
                                         "instrumentalness"
                                     ),
-                                    style={
-                                        "text-align": "center",
-                                        "margin-top": "auto",
-                                        "margin-bottom": "auto",
-                                        "color": colors["white"],
-                                    },
                                 ),
                             ],
                         ),
                         html.Div(
                             id="liveness-card",
-                            style={
-                                "display": "flex",
-                                "flex-direction": "column",
-                                "background-color": colors["black"],
-                                "border-radius": "8px",
-                                "padding": "1rem",
-                                "box-shadow": "10px 10px 5px grey",
-                            },
+                            className="card",
                             children=[
                                 html.Div(
-                                    style={
-                                        "font-size": "1.15rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-label",
                                     children="LIVENESS",
                                 ),
                                 html.Div(
                                     id="liveness-card-value",
-                                    style={
-                                        "font-size": "2.3rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-value",
                                 ),
                                 html.Div(
-                                    id="liveness-card-description",
+                                    className="card-description",
                                     children=audio_feature_description("liveness"),
-                                    style={
-                                        "text-align": "center",
-                                        "margin-top": "auto",
-                                        "margin-bottom": "auto",
-                                        "color": colors["white"],
-                                    },
                                 ),
                             ],
                         ),
                         html.Div(
                             id="acousticness-card",
-                            style={
-                                "display": "flex",
-                                "flex-direction": "column",
-                                "background-color": colors["black"],
-                                "border-radius": "8px",
-                                "padding": "1rem",
-                                "box-shadow": "10px 10px 5px grey",
-                            },
+                            className="card",
                             children=[
                                 html.Div(
-                                    style={
-                                        "font-size": "1.15rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-label",
                                     children="ACOUSTICNESS",
                                 ),
                                 html.Div(
                                     id="acousticness-card-value",
-                                    style={
-                                        "font-size": "2.3rem",
-                                        "text-align": "center",
-                                        "color": colors["pink"],
-                                    },
+                                    className="card-value",
                                 ),
                                 html.Div(
-                                    id="acousticness-card-description",
+                                    className="card-description",
                                     children=audio_feature_description("acousticness"),
-                                    style={
-                                        "text-align": "center",
-                                        "margin-top": "auto",
-                                        "margin-bottom": "auto",
-                                        "color": colors["white"],
-                                    },
                                 ),
                             ],
                         ),
@@ -541,7 +332,7 @@ def update_output(n_clicks, query):
         preview_src = df.loc[0]["preview_url"]
         preview_style = {
             "display": "block",
-            "margin-top": "16px",
+            "margin-top": "1rem",
         }
     else:
         preview_src = ""
