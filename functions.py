@@ -2,7 +2,6 @@ import os
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import pandas as pd
-import plotly.express as px
 
 
 colors = {
@@ -70,41 +69,6 @@ def get_track_data(track_uri):
             "acousticness",
         ],
     )
-
-
-def create_graph(dataframe, variable):
-    graph = px.bar(
-        data_frame=dataframe,
-        x=variable,
-        y="name",
-        color_discrete_sequence=[colors["pink"]],
-    )
-    graph.update_layout(
-        plot_bgcolor=colors["black"],
-        paper_bgcolor=colors["black"],
-        font_color=colors["white"],
-        xaxis_showgrid=False,
-        yaxis_visible=False,
-    )
-    if variable == "danceability":
-        graph.update_xaxes(range=[0.0, 1.0])
-    elif variable == "valence":
-        graph.update_xaxes(range=[0.0, 1.0])
-    elif variable == "energy":
-        graph.update_xaxes(range=[0.0, 1.0])
-    elif variable == "tempo":
-        graph.update_xaxes(range=[0, 200])
-    elif variable == "loudness":
-        graph.update_xaxes(range=[-60, 0])
-    elif variable == "speechiness":
-        graph.update_xaxes(range=[0.0, 1.0])
-    elif variable == "instrumentalness":
-        graph.update_xaxes(range=[0.0, 1.0])
-    elif variable == "liveness":
-        graph.update_xaxes(range=[0.0, 1.0])
-    elif variable == "acousticness":
-        graph.update_xaxes(range=[0.0, 1.0])
-    return graph
 
 
 def audio_feature_description(feature):

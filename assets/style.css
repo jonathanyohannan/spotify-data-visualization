@@ -1,12 +1,6 @@
 body {
   margin: 0;
-  padding-left: 16.5%;
-  padding-right: 16.5%;
-  padding-bottom: 1em;
+  padding: 1rem;
   background-color: #191414;
   color: #ffffff;
-}
-
-.modebar {
-  display: none;
 }
