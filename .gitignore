@@ -1,5 +1,8 @@
-.vscode
-venv
-__pycache__
+*.pyc
 .cache
+.DS_Store
+.env
+.vscode
+__pycache__
 test.py
+venv
