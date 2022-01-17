@@ -1,7 +1,10 @@
 import os
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+import numpy as np
 import pandas as pd
+import plotly.graph_objects as go
+from base64 import b64encode
 
 
 colors = {
@@ -33,7 +36,7 @@ def get_track_uri(query):
 
 # Get the metadata and audio features of a track provided its Spotify URI.
 # Returns a pandas dataframe.
-def get_track_data(track_uri):
+def get_audio_features(track_uri):
     metadata = sp.track(track_id=track_uri)
     audio_features = sp.audio_features(tracks=track_uri)
     return pd.DataFrame(
@@ -72,6 +75,68 @@ def get_track_data(track_uri):
             "acousticness",
         ],
     )
+
+
+# Get the audio analysis of a track provided its Spotify URI.
+# Creates a waveform using Plotly Graph Objects, then uses b64encode to return the graph as a static image.
+def get_audio_analysis(track_uri):
+    audio_analysis = sp.audio_analysis(track_id=track_uri)
+    duration = audio_analysis["track"]["duration"]
+    segments = audio_analysis["segments"]
+    segments_map = np.zeros(shape=(len(segments), 3))
+    i = 0
+    for segment in segments:
+        segment_start = segment["start"] / duration
+        segment_duration = segment["duration"] / duration
+        segment_loudness = 1 - (min(max(segment["loudness_max"], -35), 0) / -35)
+        segments_map[i] = [segment_start, segment_duration, segment_loudness]
+        i += 1
+    maximum = np.amax(segments_map, axis=0)[2]
+    levels = []
+    for i in range(0, 1000, 1):
+        for segment in segments_map:
+            if segment[0] <= i / 1000 <= segment[0] + segment[1] and i % 8 == 0:
+                loudness = segment[2] / maximum
+                levels.append([i, loudness / 2, -loudness / 2])
+                break
+    df = pd.DataFrame(levels, columns=["index", "upper_bound", "lower_bound"])
+    trace1 = go.Bar(
+        x=df["index"],
+        y=df["upper_bound"],
+        marker_color=colors["pink"],
+        marker_line_width=0,
+    )
+    trace2 = go.Bar(
+        x=df["index"],
+        y=df["lower_bound"],
+        marker_color=colors["pink"],
+        marker_line_width=0,
+    )
+    data = [trace1, trace2]
+    layout = go.Layout(
+        barmode="overlay",
+        showlegend=False,
+        xaxis=dict(
+            showticklabels=False,
+        ),
+        yaxis=dict(
+            showticklabels=False,
+            showgrid=False,
+            zeroline=False,
+        ),
+        plot_bgcolor=colors["black"],
+        margin=dict(
+            l=0,
+            r=0,
+            b=0,
+            t=0,
+        ),
+    )
+    fig = go.Figure(data=data, layout=layout)
+    img_bytes = fig.to_image(format="png")
+    encoding = b64encode(img_bytes).decode()
+    img_b64 = "data:image/png;base64," + encoding
+    return img_b64
 
 
 # Returns descriptions of the different audio features provided in the Spotify API.

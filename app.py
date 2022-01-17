@@ -10,7 +10,8 @@ from dash import (
 )
 from functions import (
     get_track_uri,
-    get_track_data,
+    get_audio_features,
+    get_audio_analysis,
     audio_feature_description,
 )
 
@@ -45,7 +46,7 @@ app.layout = html.Div(
             },
         ),
         html.Div(
-            children="Search for any track to learn about its audio features. Data is pulled from the Spotify API.",
+            children="Search for any track to view its waveform and learn about its audio features. Data is pulled from the Spotify API.",
             style={
                 "text-align": "center",
             },
@@ -92,7 +93,6 @@ app.layout = html.Div(
                         html.Img(
                             id="image",
                             style={
-                                "box-shadow": "10px 10px 5px grey",
                                 "margin-bottom": "1rem",
                             },
                         ),
@@ -102,6 +102,17 @@ app.layout = html.Div(
                         html.Audio(
                             id="preview",
                             controls=True,
+                        ),
+                    ],
+                ),
+                html.Div(
+                    id="waveform-container",
+                    children=[
+                        html.Img(
+                            id="waveform",
+                        ),
+                        html.Div(
+                            children="The waveform for this track has been constructed by performing an audio analysis of the track's segments.",
                         ),
                     ],
                 ),
@@ -290,6 +301,7 @@ app.layout = html.Div(
     Output(component_id="album", component_property="children"),
     Output(component_id="preview", component_property="src"),
     Output(component_id="preview", component_property="style"),
+    Output(component_id="waveform", component_property="src"),
     Output(component_id="danceability-card-value", component_property="children"),
     Output(component_id="valence-card-value", component_property="children"),
     Output(component_id="energy-card-value", component_property="children"),
@@ -320,6 +332,7 @@ def update_output(n_clicks, query):
             no_update,  # album children
             no_update,  # preview src
             no_update,  # preview style
+            no_update,  # waveform src
             no_update,  # danceability-card-value children
             no_update,  # valence-card-value children
             no_update,  # energy-card-value children
@@ -330,7 +343,7 @@ def update_output(n_clicks, query):
             no_update,  # liveness-card-value children
             no_update,  # acousticness-card-value children
         )
-    df = get_track_data(uri)  # get metadata and audio features for track
+    df = get_audio_features(uri)  # get metadata and audio features for track
     if df.loc[0]["preview_url"] is not None:  # check if track has a preview
         preview_src = df.loc[0]["preview_url"]
         preview_style = {
@@ -359,6 +372,7 @@ def update_output(n_clicks, query):
         "on {}".format(df.loc[0]["album"]),  # album children
         preview_src,  # preview src
         preview_style,  # preview style
+        get_audio_analysis(uri),  # waveform src
         "{}".format(df.loc[0]["danceability"]),  # danceability-card-value children
         "{}".format(df.loc[0]["valence"]),  # valence-card-value children
         "{}".format(df.loc[0]["energy"]),  # energy-card-value children

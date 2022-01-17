@@ -6,6 +6,13 @@ body {
   font-family: sans-serif;
 }
 
+@media only screen and (max-width: 576px) {
+  #image {
+    width: 100%;
+    height: auto;
+  }
+}
+
 @media only screen and (min-width: 992px) {
   body {
     padding: 1rem 16%;
@@ -27,6 +34,35 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+  background-color: #191414;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 10px 10px 5px grey;
+}
+
+#name,
+#artist,
+#album {
+  max-width: 300px;
+}
+
+#waveform-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #191414;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 10px 10px 5px grey;
+}
+
+#waveform {
+  max-width: 100%;
+  height: auto;
 }
 
 #cards-container {
