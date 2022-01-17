@@ -6,6 +6,12 @@ body {
   font-family: sans-serif;
 }
 
+@media only screen and (max-device-width: 480px) {
+  body {
+    -webkit-text-size-adjust: none;
+  }
+}
+
 @media only screen and (max-width: 576px) {
   #image {
     width: 100%;
@@ -26,6 +32,23 @@ body {
   align-items: center;
   gap: 1rem;
   background-color: #ffffff;
+  text-align: center;
+}
+
+h1 {
+  color: #1db954;
+}
+
+a {
+  color: #1db954;
+}
+
+button {
+  color: #ffffff;
+  background-color: #1db954;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.15rem;
 }
 
 #metadata-container {

@@ -40,24 +40,13 @@ app.layout = html.Div(
     children=[
         html.H1(
             children="Spotify Data Visualizer",
-            style={
-                "color": colors["green"],
-                "text-align": "center",
-            },
         ),
         html.Div(
             children="Search for any track to view its waveform and learn about its audio features. Data is pulled from the Spotify API.",
-            style={
-                "text-align": "center",
-            },
         ),
         html.A(
             children="Source Code",
             href="https://github.com/jonathanyohannan/spotify-data-visualization/",
-            style={
-                "color": colors["green"],
-                "text-align": "center",
-            },
         ),
         dcc.Input(
             id="query-input",
@@ -69,12 +58,6 @@ app.layout = html.Div(
             id="submit-button",
             n_clicks=0,
             children="Submit",
-            style={
-                "color": colors["white"],
-                "background-color": colors["green"],
-                "border": "none",
-                "border-radius": "4px",
-            },
         ),
         html.Div(
             id="error-message",
